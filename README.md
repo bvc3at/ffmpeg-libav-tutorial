@@ -33,34 +33,34 @@ __Оглавление__
 
 # Вступление
 
-## video - what you see!
+## видео - то, что видите!
 
-If you have a sequence series of images and change them at a given frequency (let's say [24 images per second](https://www.filmindependent.org/blog/hacking-film-24-frames-per-second/)), you will create an [illusion of movement](https://en.wikipedia.org/wiki/Persistence_of_vision).
-In summary this is the very basic idea behind a video: **a series of pictures / frames running at a given rate**.
+Если серию последовательных карнинок поочередно менять с определенной переодичностью (предположим, [24 кадра в секунду](ttps://www.filmindependent.org/blog/hacking-film-24-frames-per-second/)), создастся [иллюзия движения](https://ru.wikipedia.org/wiki/Инерция_зрения).
+В итоге, это простая идея легла в основу видео: **серия картинок/кадров меняющихся с определенной частотой**.
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/1/1f/Linnet_kineograph_1886.jpg" title="flip book" height="280"></img>
+<img src="https://upload.wikimedia.org/wikipedia/commons/1/1f/Linnet_kineograph_1886.jpg" height="280"></img>
 
-Zeitgenössische Illustration (1886)
+Иллюстрация Zeitgenössische (1886)
 
-## audio - what you listen!
+## аудио - то, что вы слышите!
 
-Although a muted video can express a variety of feelings, adding sound to it brings more pleasure to the experience.
+Несмотря на то, что видеодорожка сама по себе может вызывать большое количество чувств, добавление к ней звука приносит заставляет приносить ее больше удовольствия.
 
-Sound is the vibration that propagates as a wave of pressure, through the air or any other transmission medium, such as a gas, liquid or solid.
+Звук - это вибрация, распростроняющаяся в виде упругих волн механических колебаний твёрдой, жидкой или газообразной среде (например, воздухе).
 
-> In a digital audio system, a microphone converts sound to an analog electrical signal, then an analog-to-digital converter (ADC)—typically using [pulse-code modulation—converts (PCM)](https://en.wikipedia.org/wiki/Pulse-code_modulation) the analog signal into a digital signal.
+> В цифровой аудиосистеме микрофон преобразует звук в аналоговый электрический сигнал, затем аналого-цифровой преобразователь (АЦП) - с использованием [импульсно-кодовой модуляции (ИКМ)](https://ru.wikipedia.org/wiki/Импульсно-кодовая_модуляция) преобразует аналоговый сигнал в цифровой сигнал.
 
-![audio analog to digital](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/CPT-Sound-ADC-DAC.svg/640px-CPT-Sound-ADC-DAC.svg.png "audio analog to digital")
->[Source](https://commons.wikimedia.org/wiki/File:CPT-Sound-ADC-DAC.svg)
+![преобразование аналогово аудио сингала в цифровое](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/CPT-Sound-ADC-DAC.svg/640px-CPT-Sound-ADC-DAC.svg.png "преобразование аналогово аудио сингала в цифровое")
+>[Источник](https://commons.wikimedia.org/wiki/File:CPT-Sound-ADC-DAC.svg)
 
-## codec - shrinking data
+## кодек - сжимаем данные
 
-> CODEC is an electronic circuit or software that **compresses or decompresses digital audio/video.** It converts raw (uncompressed) digital audio/video to a compressed format or vice versa.
-> https://en.wikipedia.org/wiki/Video_codec
+> **Видеокодек** — программа/алгоритм сжатия (то есть уменьшения размера) видеоданных (видеофайла, видеопотока) и восстановления сжатых данных. Кодек — файл-формула, которая определяет, каким образом можно «упаковать» видеоконтент и, соответственно, воспроизвести видео.
+> https://ru.wikipedia.org/wiki/Видеокодек
 
-But if we chose to pack millions of images in a single file and called it a movie, we might end up with a huge file. Let's do the math:
+Но если мы решим упаковать миллионы изображений в один файл и назвать это фильмом, мы получим огромный файл. Давайте сделаем некоторые подсчеты:
 
-Suppose we are creating a video with a resolution of `1080 x 1920` (height x width) and that we'll spend `3 bytes` per pixel (the minimal point at a screen) to encode the color (or [24 bit color](https://en.wikipedia.org/wiki/Color_depth#True_color_.2824-bit.29), what gives us 16,777,216 different colors) and this video runs at `24 frames per second` and it is `30 minutes` long.
+Допустим, мы создаем видео с разрешением `1080 x 1920` (высота x ширина), тратя `3 байта` на каждый пиксель, чтобы закодировать цвет (так называемый [TrueColor](https://ru.wikipedia.org/wiki/TrueColor), который дает нам 16,777,216 разных цветов) и это видео продолжительностью `30 минут` содержит `24 кадра в секунду`.
 
 ```c
 toppf = 1080 * 1920 //total_of_pixels_per_frame
@@ -71,34 +71,35 @@ fps = 24 //frames_per_second
 required_storage = tis * fps * toppf * cpp
 ```
 
-This video would require approximately `250.28GB` of storage or `1.11Gbps` of bandwidth! That's why we need to use a [CODEC](https://github.com/leandromoreira/digital_video_introduction#how-does-a-video-codec-work).
+Для видео понадобилость бы примерно `250.28GB` места или `1.11Gbps` пропускной способности! Поэтому, если необходимость в использовании [кодека](https://github.com/leandromoreira/digital_video_introduction#how-does-a-video-codec-work).
 
-## container - a comfy place for audio and video
+
+## контейнер - уютное место для вашего видео и аудио
 
 > A container or wrapper format is a metafile format whose specification describes how different elements of data and metadata coexist in a computer file.
 > https://en.wikipedia.org/wiki/Digital_container_format
 
-A **single file that contains all the streams** (mostly the audio and video) and it also provides **synchronization and general metadata**, such as title, resolution and etc.
+**Отдельный файл, содержащий все потоки** (в основном аудио и видео), а также предоставляющий **синхронизацию и основные метаданные**, такие как название, разрешение и т.д.
 
-Usually we can infer the format of a file by looking at its extension: for instance a `video.webm` is probably a video using the container [`webm`](https://www.webmproject.org/).
+Обычно мы можем определить формат файла, посмотрев на его расширение: например, «video.webm» - это, вероятно, видео использующее контейнер [`webm`](https://www.webmproject.org/).
 
 ![container](/img/container.png)
 
-# FFmpeg - command line
+# Консольная утилита FFmpeg
 
-> A complete, cross-platform solution to record, convert and stream audio and video.
+> Готовое, кросс-платформенное решение для записи, конвертирования и передачи аудио и видео.
 
-To work with multimedia we can use the AMAZING tool/library called [FFmpeg](https://www.ffmpeg.org/). Chances are you already know/use it directly or indirectly (do you use [Chrome?](https://www.chromium.org/developers/design-documents/video)).
+Для работы с мультимедиа мы можем использовать чудесную утилиту/библиотеку под названием [FFmpeg](https://www.ffmpeg.org/). Скорее всего, вы уже знаете о ней, или даже используете ее прямо или косвенно (вы используете [Chrome?](https://www.chromium.org/developers/design-documents/video)).
 
-It has a command line program called `ffmpeg`, a very simple yet powerful binary.
-For instance, you can convert from `mp4` to the container `avi` just by typing the follow command:
+В него входит утилита для командной строки, именнуемая `ffmpeg`, очень простая но мощная программа.
+Например, вы можете конвертировать из `mp4` в контейнер` avi`, просто используя следующую команду:
 
 ```bash
 $ ffmpeg -i input.mp4 output.avi
 ```
 
-We just made a **remuxing** here, which is converting from one container to another one.
-Technically FFmpeg could also be doing a transcoding but we'll talk about that later.
+Мы просто совершили **remuxing**, который конвертирует из одного контейнера в другой.
+Технически, FFmpeg также может делать транскодинг, но о нем мы поговорим немного позже.
 
 ## FFmpeg command line tool 101
 
