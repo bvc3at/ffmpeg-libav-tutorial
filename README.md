@@ -1,12 +1,12 @@
 [![license](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg)](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg)
 
-I was looking for a tutorial/book that would teach me how to start to use [FFmpeg](https://www.ffmpeg.org/) as a library (a.k.a. libav) and then I found the ["How to write a video player in less than 1k lines"](http://dranger.com/ffmpeg/) tutorial.
-Unfortunately it was deprecated, so I decided to write this one.
+Будучи в поисках учебного пособия/книги, которые научили бы меня использовать [FFmpeg](https://www.ffmpeg.org/) в качестве библиотеки (aka libav) я нашел [«How to Write a Video Player in Less Than 1000 Lines»](http://dranger.com/ffmpeg/).
+К сожалению, информация там устарела, поэтому я решил написать свой материал
 
-Most of the code in here will be in c **but don't worry**: you can easily understand and apply it to your preferred language.
-FFmpeg libav has lots of bindings for many languages like [python](https://mikeboers.github.io/PyAV/), [go](https://github.com/imkira/go-libav) and even if your language doesn't have it, you can still support it through the `ffi` (here's an example with [Lua](https://github.com/daurnimator/ffmpeg-lua-ffi/blob/master/init.lua)).
+Большая часть представленого здесь кода будет на C, **но не волнуйтесь**: вы можете легко понять и применить ее на предпочитаемом вами языке.
+FFmpeg libav имеет множество биндингов для множества языков, таких как [python](https://mikeboers.github.io/PyAV/), [go](https://github.com/imkira/go-libav) и даже если ваш любимый язык не имеет готовый биндинг, вы все равно можете использовать его через `ffi` (вот пример с [Lua](https://github.com/daurnimator/ffmpeg-lua-ffi/blob/master/init.lua)).
 
-We'll start with a quick lesson about what is video, audio, codec and container and then we'll go to a crash course on how to use `FFmpeg` command line and finally we'll write code, feel free to skip directly to[ ](http://newmediarockstars.com/wp-content/uploads/2015/11/nintendo-direct-iwata.jpg)the section [Learn FFmpeg libav the Hard Way.](#learn-ffmpeg-libav-the-hard-way)
+Мы начнем с введения о том, что такое видео, аудио, кодек и контейнер, а затем мы перейдем к ускоренному курсу о том, как использовать приложение для командной строки `FFmpeg`, и, в конце, мы напишем код. Не стесняйтесь переходить напрямую в [](http://newmediarockstars.com/wp-content/uploads/2015/11/nintendo-direct-iwata.jpg) раздел [Learn FFmpeg libav the Hard Way.](#learn-ffmpeg-libav-the-hard-way)
 
 Some people used to say that the Internet video streaming is the future of the traditional TV, in any case, the FFmpeg is something that is worth studying.
 
