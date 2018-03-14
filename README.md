@@ -1,6 +1,6 @@
 [![license](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg)](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg)
 
-Будучи в поисках учебного пособия/книги, которые научили бы меня использовать [FFmpeg](https://www.ffmpeg.org/) в качестве библиотеки (aka libav) я нашел [«How to Write a Video Player in Less Than 1000 Lines»](http://dranger.com/ffmpeg/).
+Будучи в поисках учебного пособия/книги, которые научили бы меня использовать [FFmpeg](https://www.ffmpeg.org/) в качестве библиотеки (aka libav) я нашел статью [«How to Write a Video Player in Less Than 1000 Lines»](http://dranger.com/ffmpeg/).
 К сожалению, информация там устарела, поэтому я решил написать свой материал
 
 Большая часть представленого здесь кода будет на C, **но не волнуйтесь**: вы можете легко понять и применить ее на предпочитаемом вами языке.
