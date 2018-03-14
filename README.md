@@ -101,32 +101,33 @@ $ ffmpeg -i input.mp4 output.avi
 Мы просто совершили **remuxing**, который конвертирует из одного контейнера в другой.
 Технически, FFmpeg также может делать транскодинг, но о нем мы поговорим немного позже.
 
-## FFmpeg command line tool 101
+## Курс молодого бойца по консольной утилите FFmpeg
 
-FFmpeg does have a [documentation](https://www.ffmpeg.org/ffmpeg.html) that does a great job of explaining how it works.
+FFmpeg поставляется с хорошей [документацией (англ.)](https://www.ffmpeg.org/ffmpeg.html) которая прекрасно объясняет, как он работает.
 
-To make things short, the FFmpeg command line program expects the following argument format to perform its actions `ffmpeg {1} {2} -i {3} {4} {5}`, where:
+В двух словах, утилита FFmpeg для работы ожидает следующий формат аргументов `ffmpeg {1} {2} -i {3} {4} {5}`, где:
 
-1. global options
-2. input file options
-3. input url
-4. output file options
-5. output url
+1. глобальные параметры
+2. параметры входного файла
+3. адрес входного файла
+4. параметры выходного файла
+5. адрес выходного файла
 
-The parts 2, 3, 4 and 5 can be as many as you need.
-It's easier to understand this argument format in action:
+Части 2, 3, 4 и 5 могут использованы столько раз, сколько это необходимо.
+Этот формат лучше понимается на примерах:
 
 ``` bash
-# WARNING: this file is around 300MB
+# Предупреждение: размер файла около 300MB
 $ wget -O bunny_1080p_60fps.mp4 http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_60fps_normal.mp4
 
 $ ffmpeg \
--y \ # global options
--c:a libfdk_aac -c:v libx264 \ # input options
--i bunny_1080p_60fps.mp4 \ # input url
--c:v libvpx-vp9 -c:a libvorbis \ # output options
-bunny_1080p_60fps_vp9.webm # output url
+-y \ # {1} глобальные параметры
+-c:a libfdk_aac -c:v libx264 \ # {2} параметры входного файла
+-i bunny_1080p_60fps.mp4 \ # {3} адрес входного файла
+-c:v libvpx-vp9 -c:a libvorbis \ # {4} параметры выходного файла
+bunny_1080p_60fps_vp9.webm # {5} адрес выходного файла
 ```
+
 This command takes an input file `mp4` containing two streams (an audio encoded with `aac` CODEC and a video encoded using `h264` CODEC) and convert it to `webm`, changing its audio and video CODECs too.
 
 We could simplify the command above but then be aware that FFmpeg will adopt or guess the default values for you.
